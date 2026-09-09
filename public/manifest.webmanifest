@@ -1,0 +1,30 @@
+{
+  "name": "Giftköder-Radar NRW",
+  "short_name": "Giftköder-Radar",
+  "description": "Offline-First Radar für Giftköder-Meldungen in Nordrhein-Westfalen. Local-First, ohne Login, ohne Tracker.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F0EBCF",
+  "theme_color": "#5E7337",
+  "lang": "de",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

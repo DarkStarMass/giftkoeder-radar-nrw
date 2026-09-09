@@ -1,0 +1,162 @@
+@import "tailwindcss";
+@import "maplibre-gl/dist/maplibre-gl.css";
+
+@theme {
+  --color-paper: #f0ebcf;
+  --color-moss: #5e7337;
+  --color-moss-dark: #4a5c2b;
+  --color-earth: #8e834d;
+  --color-ink: #261f19;
+  --color-ink-soft: #3a322b;
+  --color-title: #e4e756;
+  --color-threat: #dc2626;
+  --color-threat-dark: #b91c1c;
+  --color-overlay: #261f19cc;
+  --color-map-ground: #cfd6c2;
+
+  --font-sans: "Segoe UI", ui-sans-serif, system-ui, -apple-system, "Noto Sans",
+    sans-serif;
+  --font-display: "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.875rem;
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.5;
+}
+
+@layer base {
+  html,
+  body {
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .threat-pulse {
+    animation: none;
+  }
+}
+
+@keyframes threat-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+.threat-pulse {
+  animation: threat-pulse 2.2s var(--ease, ease-out) infinite;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  min-height: 100svh;
+  max-height: 100dvh;
+}
+
+.maplibregl-map {
+  font-family: var(--font-sans);
+}
+
+.maplibregl-ctrl-attrib {
+  font-size: 10px;
+  background: color-mix(in srgb, var(--color-paper) 88%, transparent);
+}
+
+/* Flex item + percent height collapses MapLibre to 0px. Absolute fill wins. */
+.map-stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 18rem;
+  width: 100%;
+  background: var(--color-map-ground);
+  overscroll-behavior: none;
+}
+
+.map-stage-inner {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.map-stage .maplibregl-map {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.map-stage .maplibregl-canvas-container,
+.map-stage .maplibregl-canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.raster-map {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  touch-action: none;
+  background: var(--color-map-ground);
+  user-select: none;
+}
+
+.raster-tile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 256px;
+  height: 256px;
+  max-width: none;
+  pointer-events: none;
+}
